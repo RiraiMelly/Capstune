@@ -1,0 +1,25 @@
+cat > .gitattributes << EOL
+# Set default behavior to automatically normalize line endings.
+* text=auto
+# Define attributes for Python files.
+*.py text eol=lf
+# Define attributes for Kivy files.
+*.kv text eol=lf
+# Define attributes for images.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+# Define attributes for configuration files.
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+# Define attributes for markdown files.
+*.md text eol=lf
+# Define attributes for HTML files.
+*.html text eol=lf
+# Define attributes for Pickle files
+.pickle binary
+.p binary
+EOL
+*.psd filter=lfs diff=lfs merge=lfs -text

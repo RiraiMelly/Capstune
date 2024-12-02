@@ -1,0 +1,17 @@
+# Ignore virtual environments
+venv/
+kivy_venv/
+
+# Ignore Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore environment variables and system files
+.env
+.DS_Store
+Thumbs.db
+
+# Ignore logs and temporary files
+*.log
+*.tmp

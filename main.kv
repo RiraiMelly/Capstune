@@ -1,0 +1,125 @@
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+
+BoxLayout:
+    orientation: "vertical"
+
+    ScreenManager:
+        id: scr
+        transition: NoTransition()
+
+        Screen:
+            name: 'home'
+            BoxLayout:
+                orientation: 'vertical'
+                canvas.before:
+                    Color:
+                        rgba: 0.1, 0.1, 0.1, 1  # Background color
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+                FloatLayout:
+                    Image:
+                        source: 'logo/logo.png'
+                        size_hint: None, None
+                        size: 450, 450
+                        pos_hint: {"center_x": 0.5, "center_y": 0.65}  # Center logo in screen
+
+                    MDRaisedButton:
+                        text: "Open Camera"
+                        size_hint: None, None
+                        size: 150, 50
+                        pos_hint: {"center_x": 0.5, "center_y": 0.45}  # Below logo
+                        on_press:
+                            app.run_open_cv()
+
+                    MDRaisedButton:
+                        text: "CV Word"
+                        size_hint: None, None
+                        size: 150, 50
+                        pos_hint: {"center_x": 0.5, "center_y": 0.35}  # Below "Open Camera"
+                        on_press:
+                            app.run_inference_classifier()
+
+                    MDRaisedButton:
+                        text: "CV Letter"
+                        size_hint: None, None
+                        size: 150, 50
+                        pos_hint: {"center_x": 0.5, "center_y": 0.25}  # Below "CV Letter"
+
+        MDScreen:
+            name: "lms_dashboard"
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: dp(20)
+                spacing: dp(20)
+                size_hint_y: None  # Set size hint to avoid zero division
+                height: self.minimum_height
+                
+                MDLabel:
+                    text: "LMS Dashboard"
+                    halign: "center"
+                    font_style: "H4"
+                    size_hint_y: None
+                    height: self.texture_size[1] + dp(20)
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+
+                ScrollView:
+                    MDList:
+                        id: courses_list
+
+                MDRaisedButton:
+                    text: "Back to Main"
+                    size_hint: None, None
+                    size: 150, 50
+                    pos_hint: {"center_x": 0.5}
+                    on_press: 
+                        scr.current = "home"
+
+        Screen:
+            name: 'settings'
+            BoxLayout:
+                orientation: 'vertical'
+                canvas.before:
+                    Color:
+                        rgba: 0.1, 0.1, 0.1, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+                MDLabel:
+                    text: "Settings"
+                    halign: "center"
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: dp(48)
+                    padding: dp(16)
+
+                    MDLabel:
+                        text: "Dark Mode"
+                        halign: "center"
+
+                    Switch:
+                        id: theme_switch
+                        active: True
+                        on_active: app.toggle_theme(self, self.active)
+
+        Screen:
+            name: 'about'
+            BoxLayout:
+                orientation: 'vertical'
+                canvas.before:
+                    Color:
+                        rgba: 0.1, 0.1, 0.1, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+                MDLabel:
+                    text: "About"
+                    halign: "center"
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
